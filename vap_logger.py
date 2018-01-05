@@ -4,22 +4,46 @@
 # Reads in county, multiplier data from va_list.py
 
 
+import argparse
 import datetime as dt
 
 from va_list import *
 
-
 #print counties
-print counties["abbrev"]
-print counties["name"]
+#print counties["abbrev"]
+#print counties["name"]
+mycall=None
+myqth=None
+
+
+parser = argparse.ArgumentParser(description='VA QSO party options')
+parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
+
+opts=parser.parse_args()
+
+# Pull initial call and qth out of config file, if set
+if opts.config is not None:
+    line = opts.config.readline()
+    while line:
+        if "mycall" in line:
+            linelist=line.split()
+            mycall = linelist[1]
+        elif "myqth" in line:
+            linelist=line.split()
+            myqth = linelist[1]
+
+        line = opts.config.readline()
 
 # Need to add initial setup
 timenow = dt.datetime.utcnow()
 print timenow
-# Ask for call sign
-mycall = raw_input('Please enter your callsign: ')
-# Ask for location
-myqth = raw_input('Please entery your location: ')
+
+# Ask for call sign if not set with config file
+if mycall is None:
+    mycall = raw_input('Please enter your callsign: ')
+# Ask for location if not set with config file
+if myqth is None:
+    myqth = raw_input('Please entery your location: ')
 
 
 try:
