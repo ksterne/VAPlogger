@@ -16,6 +16,8 @@ counties["abbrev"].extend(['FRE', 'FBX', 'GAX', 'GIL', 'GLO'])
 counties["abbrev"].extend(['GOO', 'GRA', 'GRN', 'GVL', 'HAL'])
 counties["abbrev"].extend(['HAX', 'HAN', 'HCO', 'HBX', 'HRY'])
 counties["abbrev"].extend(['HIG', 'HOX', 'IOW', 'JAM', 'KQN'])
+counties["abbrev"].extend(['KGE', 'KWM', 'LAN', 'LEE', 'LEX'])
+
 
 
 
