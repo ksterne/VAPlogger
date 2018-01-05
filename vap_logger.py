@@ -3,13 +3,11 @@
 # Reads in county, multiplier data from va_list.py
 
 
-
 from va_list import *
 
 
-print counties
-print states
-
+print counties["abbrev"]
+print counties["name"]
 
 try:
     while (1):
@@ -19,7 +17,7 @@ try:
 #        print entry
         entry.strip('\n')
 
-        if entry in counties:
+        if entry in counties["abbrev"] or entry in counties["name"]:
             print 'hi!'
         else:
             print ':('
