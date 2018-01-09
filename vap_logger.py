@@ -6,6 +6,7 @@
 
 import argparse
 import datetime as dt
+import sys
 
 from va_list import *
 
@@ -54,10 +55,21 @@ try:
         print entry
         entry.strip('\n')
 
-        if entry in counties["abbrev"] or entry in counties["name"]:
+        # Give an input to stop the program
+        if entry in "exit" or entry in "quit":
+            sys.exit()
+
+
+
+#        if entry in counties["abbrev"] or entry in counties["name"]:
+        if entry in counties["abbrev"]:
             print 'hi!'
+        elif entry in counties["name"]:
+            print 'Pull out abbrev'
         else:
             print ':('
+
+
 
 except KeyboardInterrupt:
     print '\nInterrupted and exiting...'
