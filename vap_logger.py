@@ -50,7 +50,7 @@ if myqth is None:
 try:
     while (1):
 
-        entry = raw_input('Please enter new QSO: ')
+        entry = raw_input('Please enter new QSO (f1 change QTH): ')
 
         print entry
         entry.strip('\n')
@@ -59,6 +59,13 @@ try:
         if entry in "exit" or entry in "quit":
             sys.exit()
 
+        if entry.lower() in "f1":
+            myqth = raw_input('Enter new QTH: ').strip('\n')
+            while myqth not in counties["abbrev"]:
+                print myqth + " not found in counties list"
+                myqth = raw_input('Please enter new QTH: ').strip('\n')
+
+            continue
 
 
 #        if entry in counties["abbrev"] or entry in counties["name"]:
