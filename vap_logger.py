@@ -16,6 +16,7 @@ from va_list import *
 mycall=None
 myqth=None
 
+count=1
 
 parser = argparse.ArgumentParser(description='VA QSO party options')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
@@ -50,7 +51,7 @@ if myqth is None:
 try:
     while (1):
 
-        entry = raw_input('Please enter new QSO (f1 change QTH): ')
+        entry = raw_input('Please enter QSO number '+str(count).zfill(3)+' (f1 change QTH): ')
 
         print entry
         entry.strip('\n')
@@ -75,6 +76,13 @@ try:
             print 'Pull out abbrev'
         else:
             print ':('
+
+        logit = raw_input('Log it? ').strip('\n')
+        if logit in "y" or logit in "yes" or logit.upper() in "Y":
+            print "Logged!"
+            count += 1
+        else:
+            print "Not logged"
 
 
 
