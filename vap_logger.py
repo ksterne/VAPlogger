@@ -15,6 +15,7 @@ from va_list import *
 #print counties["name"]
 mycall=None
 myqth=None
+band=None
 
 count=1
 
@@ -45,15 +46,19 @@ if mycall is None:
     mycall = raw_input('Please enter your callsign: ')
 # Ask for location if not set with config file
 if myqth is None:
-    myqth = raw_input('Please entery your location: ')
+    myqth = raw_input('Please enter your location: ')
+if band is None:
+    band = raw_input('Please enter frequency band in kHz: ')
 
 
 try:
     while (1):
 
-        entry = raw_input('Please enter QSO number '+str(count).zfill(3)+' (f1 change QTH): ')
+        print "Frequency band: "+str(band)
+        print "f1: change QTH, f2: change band"
+        entry = raw_input('Please enter QSO number '+str(count).zfill(3)+': ')
 
-        print entry
+#        print entry
         entry.strip('\n')
 
         # Give an input to stop the program
@@ -67,6 +72,15 @@ try:
                 myqth = raw_input('Please enter new QTH: ').strip('\n')
 
             continue
+        elif entry.lower() in "f2":
+            band = raw_input('Please enter new band in kHz: ').strip('\n')
+            continue
+
+
+        # Assume format of callsign,number,qth
+        newqso = entry.split(',')
+        print newqso
+
 
 
 #        if entry in counties["abbrev"] or entry in counties["name"]:
