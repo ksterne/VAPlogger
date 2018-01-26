@@ -87,7 +87,7 @@ try:
 #        if entry in counties["abbrev"] or entry in counties["name"]:
 # This may be more useful in the future with some kind of
 # auto-complete search
-        if yourqth in counties["abbrev"]:
+        if yourqth in counties["abbrev"] or yourqth.upper() in counties["abbrev"]:
 #            print 'hi!'
             some="one"
         elif yourqth in counties["name"]:
@@ -99,6 +99,15 @@ try:
             print 'QTH not valid, please try again'
             continue
 
+        # Lets start to form the output message
+        qsostring = "QSO: " + band + " PH "
+        # Lets grab the current time
+        nowtime = dt.datetime.utcnow().strftime('%Y-%m-%d %H%M')
+        qsostring += str(nowtime) + " " + mycall
+        qsostring += " " + str(count).zfill(3) + " " + myqth
+        qsostring += " " + newqso[0] + " " + newqso[1]
+        qsostring += " " + yourqth
+        print qsostring
 
         logit = raw_input('Log it? ').strip('\n')
         if logit in "y" or logit in "yes" or logit.upper() in "Y":
