@@ -81,15 +81,24 @@ try:
         newqso = entry.split(',')
         print newqso
 
+        yourqth = newqso[2]
 
 
 #        if entry in counties["abbrev"] or entry in counties["name"]:
-        if entry in counties["abbrev"]:
-            print 'hi!'
-        elif entry in counties["name"]:
-            print 'Pull out abbrev'
+# This may be more useful in the future with some kind of
+# auto-complete search
+        if yourqth in counties["abbrev"]:
+#            print 'hi!'
+            some="one"
+        elif yourqth in counties["name"]:
+#            print 'Pull out abbrev'
+            some="two"
+        elif yourqth in "DX":
+            some="three"
         else:
-            print ':('
+            print 'QTH not valid, please try again'
+            continue
+
 
         logit = raw_input('Log it? ').strip('\n')
         if logit in "y" or logit in "yes" or logit.upper() in "Y":
