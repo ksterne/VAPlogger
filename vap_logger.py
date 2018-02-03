@@ -21,6 +21,8 @@ count=1
 
 parser = argparse.ArgumentParser(description='VA QSO party options')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
+parser.add_argument('-l', '--log', help="Log filename to read/save to")
+
 
 opts=parser.parse_args()
 
@@ -80,6 +82,10 @@ try:
         # Assume format of callsign,number,qth
         newqso = entry.split(',')
         print newqso
+#        print len(newqso)
+        if len(newqso) < 3:
+            print "Invalid format, please enter QSO as: callsign, serial#, QTH"
+            continue
 
         yourqth = newqso[2]
 
@@ -111,6 +117,8 @@ try:
 
         logit = raw_input('Log it? ').strip('\n')
         if logit in "y" or logit in "yes" or logit.upper() in "Y":
+            with open(opts.log, 'a') as logfile:
+               logfile.write(qsostring)
             print "Logged!"
             count += 1
         else:
