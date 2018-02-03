@@ -112,7 +112,7 @@ try:
         qsostring += str(nowtime) + " " + mycall
         qsostring += " " + str(count).zfill(3) + " " + myqth
         qsostring += " " + newqso[0] + " " + newqso[1]
-        qsostring += " " + yourqth
+        qsostring += " " + yourqth + "\n"
         print qsostring
 
         logit = raw_input('Log it? ').strip('\n')
