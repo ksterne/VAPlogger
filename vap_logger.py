@@ -6,6 +6,7 @@
 
 import argparse
 import datetime as dt
+import os.path
 import sys
 
 from va_list import *
@@ -21,7 +22,7 @@ count=1
 
 parser = argparse.ArgumentParser(description='VA QSO party options')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
-parser.add_argument('-l', '--log', help="Log filename to read/save to")
+parser.add_argument('-l', '--log', default='default.txt', help="Log filename to read/save to")
 
 
 opts=parser.parse_args()
@@ -38,6 +39,16 @@ if opts.config is not None:
             myqth = linelist[1]
 
         line = opts.config.readline()
+
+# Check to see if logfile name exists
+if os.path.isfile(opts.log):
+    # Then lets read in current data
+    with open(opts.log, 'r') as readf:
+        line = readf.readline()
+        print line
+        while line:
+            print line
+            line = readf.readline()
 
 # Need to add initial setup
 timenow = dt.datetime.utcnow()
