@@ -99,6 +99,8 @@ try:
 #            print "Invalid format, please enter QSO as: callsign, serial#, QTH"
 #            continue
 
+        yourcall = newqso[0].upper().strip(' ')
+        yournum = newqso[1].strip(' ')
         yourqth = newqso[2].strip(' ')
 
 
@@ -106,8 +108,8 @@ try:
 # This may be more useful in the future with some kind of
 # auto-complete search
         if yourqth in counties["abbrev"] or yourqth.upper() in counties["abbrev"]:
-#            print 'hi!'
-            some="one"
+            # Make sure the QTH value is uppercase
+            yourqth = yourqth.upper()
         elif yourqth in counties["name"]:
 #            print 'Pull out abbrev'
             some="two"
@@ -123,7 +125,7 @@ try:
         nowtime = dt.datetime.utcnow().strftime('%Y-%m-%d %H%M')
         qsostring += str(nowtime) + " " + "{:10}".format(mycall)
         qsostring += " " + str(count).zfill(3) + " " + "{:7}".format(myqth)
-        qsostring += "{:10}".format(newqso[0]) + " " + newqso[1]
+        qsostring += "{:10}".format(yourcall) + " " + yournum.zfill(3)
         qsostring += " " + yourqth + "\n"
         print qsostring
 
