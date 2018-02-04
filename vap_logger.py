@@ -45,14 +45,20 @@ if os.path.isfile(opts.log):
     # Then lets read in current data
     with open(opts.log, 'r') as readf:
         line = readf.readline()
-        print line
         while line:
             print line
+#            spline = line.split(' ')
+#            print spline
+            print line[42:45].strip(' ').rstrip('0')
+
             line = readf.readline()
+#        count = int(line[42:45].strip(' ').lstrip("0"))
+#        print count
+
 
 # Need to add initial setup
 timenow = dt.datetime.utcnow()
-print timenow
+print "The current time is: " + str(timenow)
 
 # Ask for call sign if not set with config file
 if mycall is None:
@@ -120,7 +126,7 @@ try:
             continue
 
         # Lets start to form the output message
-        qsostring = "QSO: " + band + " PH "
+        qsostring = "QSO: " + "{:>6}".format(band) + " PH "
         # Lets grab the current time
         nowtime = dt.datetime.utcnow().strftime('%Y-%m-%d %H%M')
         qsostring += str(nowtime) + " " + "{:10}".format(mycall)
