@@ -99,7 +99,7 @@ try:
 #            print "Invalid format, please enter QSO as: callsign, serial#, QTH"
 #            continue
 
-        yourqth = newqso[2]
+        yourqth = newqso[2].strip(' ')
 
 
 #        if entry in counties["abbrev"] or entry in counties["name"]:
@@ -114,16 +114,16 @@ try:
         elif yourqth in "DX":
             some="three"
         else:
-            print 'QTH not valid, please try again'
+            print 'QTH {} not valid, please try again'.format(yourqth)
             continue
 
         # Lets start to form the output message
         qsostring = "QSO: " + band + " PH "
         # Lets grab the current time
         nowtime = dt.datetime.utcnow().strftime('%Y-%m-%d %H%M')
-        qsostring += str(nowtime) + " " + mycall
-        qsostring += " " + str(count).zfill(3) + " " + myqth
-        qsostring += " " + newqso[0] + " " + newqso[1]
+        qsostring += str(nowtime) + " " + "{:10}".format(mycall)
+        qsostring += " " + str(count).zfill(3) + " " + "{:7}".format(myqth)
+        qsostring += "{:10}".format(newqso[0]) + " " + newqso[1]
         qsostring += " " + yourqth + "\n"
         print qsostring
 
