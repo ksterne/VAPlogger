@@ -79,6 +79,8 @@ counties["name"] = ['Accomack', 'Albemarle', 'Alexandria',
                     'Waynesboro', 'Westmoreland', 'Williamsburg',
                     'Winchester', 'Wise', 'Wythe', 'York']
 
+# Initialize the states list
+states = {}
 
 states['abbrev'] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC",
                     "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA",
