@@ -123,7 +123,7 @@ try:
 #            print 'Pull out abbrev'
             some="two"
         elif yourqth in states['abbrev'] or yourqth.upper() in states['abbrev']:
-            print "Found a state!"
+            # Make sure the QTH value is uppercase
             yourqth = yourqth.upper()
         elif yourqth in "DX":
             some="three"
