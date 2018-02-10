@@ -18,6 +18,7 @@ mycall=None
 myqth=None
 band=None
 
+# Default starting number for QSO count number
 count=1
 
 parser = argparse.ArgumentParser(description='VA QSO party options')
@@ -42,18 +43,20 @@ if opts.config is not None:
 
 # Check to see if logfile name exists
 if os.path.isfile(opts.log):
+    print "Reading in current log at: %s" % opts.log
     # Then lets read in current data
     with open(opts.log, 'r') as readf:
         line = readf.readline()
         while line:
-            print line
+#            print line
 #            spline = line.split(' ')
 #            print spline
-            print line[42:45].strip(' ').rstrip('0')
+            count=int(line[42:45].strip(' ').lstrip('0'))
+#            print count
 
             line = readf.readline()
-#        count = int(line[42:45].strip(' ').lstrip("0"))
-#        print count
+        # increment count value by one to show next QSO
+        count += 1
 
 
 # Need to add initial setup
@@ -73,7 +76,7 @@ if band is None:
 try:
     while (1):
 
-        print "Frequency band: "+str(band)
+        print "Current Frequency band: "+str(band)
         print "f1: change QTH, f2: change band"
         entry = raw_input('Please enter QSO number '+str(count).zfill(3)+': ')
 
@@ -119,6 +122,7 @@ try:
         elif yourqth in counties["name"]:
 #            print 'Pull out abbrev'
             some="two"
+        elif yourqth in 
         elif yourqth in "DX":
             some="three"
         else:
