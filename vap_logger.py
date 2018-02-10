@@ -85,6 +85,7 @@ try:
 
         # Give an input to stop the program
         if entry in "exit" or entry in "quit":
+            print "Now exiting..."
             sys.exit()
 
         if entry.lower() in "f1":
@@ -101,12 +102,11 @@ try:
 
         # Assume format of callsign,number,qth
         newqso = entry.split(',')
-        print newqso
-# Come back to this later
+#        print newqso
 #        print len(newqso)
-#        if len(newqso) < 3:
-#            print "Invalid format, please enter QSO as: callsign, serial#, QTH"
-#            continue
+        if len(newqso) != 3:
+            print "Invalid format, please enter QSO as: callsign,serial#,QTH"
+            continue
 
         yourcall = newqso[0].upper().strip(' ')
         yournum = newqso[1].strip(' ')
