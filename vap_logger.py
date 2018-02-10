@@ -122,7 +122,9 @@ try:
         elif yourqth in counties["name"]:
 #            print 'Pull out abbrev'
             some="two"
-        elif yourqth in 
+        elif yourqth in states['abbrev'] or yourqth.upper() in states['abbrev']:
+            print "Found a state!"
+            yourqth = yourqth.upper()
         elif yourqth in "DX":
             some="three"
         else:
