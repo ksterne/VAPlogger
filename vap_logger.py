@@ -125,6 +125,9 @@ try:
         elif yourqth in states['abbrev'] or yourqth.upper() in states['abbrev']:
             # Make sure the QTH value is uppercase
             yourqth = yourqth.upper()
+        elif yourqth in province['abbrev'] or yourqth.upper() in provnice['abbrev']:
+            # Make sure the QTH value is uppercase
+            yourqth = yourqth.upper()
         elif yourqth in "DX":
             some="three"
         else:

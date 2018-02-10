@@ -89,3 +89,9 @@ states['abbrev'] = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC",
                     "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI",
                     "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WA",
                     "WV", "WI", "WY"]
+
+# Initialize the province list
+province = {}
+
+province['abbrev'] = ["AB", "BC", "MB", "NB", "NL", "NS", "NT",
+                      "NU", "ON", "PE", "QC", "SK", "YT"]
