@@ -21,6 +21,15 @@ band=None
 # Default starting number for QSO count number
 count=1
 
+# Setup QSO list/dictionary?
+qso = {}
+qso['band'] = []
+qso['myqth'] = []
+qso['mynum'] = []
+qso['yourcall'] = []
+qso['yournum'] = []
+qso['yourqth'] = []
+
 parser = argparse.ArgumentParser(description='VA QSO party options')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
 parser.add_argument('-l', '--log', default='default.txt', help="Log filename to read/save to")
@@ -134,6 +143,14 @@ try:
             print 'QTH {} not valid, please try again'.format(yourqth)
             continue
 
+
+
+        # Here we'll need to do dupe checking before going on
+
+
+
+
+
         # Lets start to form the output message
         qsostring = "QSO: " + "{:>6}".format(band) + " PH "
         # Lets grab the current time
@@ -148,6 +165,18 @@ try:
         if logit in "y" or logit in "yes" or logit.upper() in "Y":
             with open(opts.log, 'a') as logfile:
                logfile.write(qsostring)
+            # Let's add to the qso dictionary for dupe checking
+            qso['band'].append(band)
+            qso['myqth'].append(myqth)
+            qso['mynum'].append(str(count).zfill(3))
+            qso['yourcall'].append(yourcall)
+            qso['yournum'].append(yournum.zfill(3))
+            qso['yourqth'].append(yourqth)
+#            print qso['band']
+#            print qso['yourcall']
+#            print qso['yournum']
+#            print qso['yourqth']
+
             print "Logged!"
             count += 1
         else:
