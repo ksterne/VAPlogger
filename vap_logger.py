@@ -57,11 +57,13 @@ if os.path.isfile(opts.log):
     with open(opts.log, 'r') as readf:
         line = readf.readline()
         while line:
-#            print line
-#            spline = line.split(' ')
-#            print spline
+            qso['band'].append(line[5:11].strip(' '))
+            qso['mynum'].append(line[42:45])
+            qso['myqth'].append(line[46:49])
+            qso['yourcall'].append(line[53:63].strip(' '))
+            qso['yournum'].append(line[64:67])
+            qso['yourqth'].append(line[68:71])
             count=int(line[42:45].strip(' ').lstrip('0'))
-#            print count
 
             line = readf.readline()
         # increment count value by one to show next QSO
