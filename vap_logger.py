@@ -146,6 +146,12 @@ try:
 
 
         # Here we'll need to do dupe checking before going on
+        if yourcall in qso['yourcall']:
+            print "Found duplicate call at least"
+            # Find all of the places where the callsign matches
+            callindexes = [ i for i,x in enumerate(qso['yourcall']) if x == yourcall]
+#            print callindexes
+#            print qso['yourcall']
 
 
 
