@@ -152,18 +152,19 @@ try:
             print "Found duplicate call at least"
             # Find all of the places where the callsign matches
             callindexes = [ i for i,x in enumerate(qso['yourcall']) if x == yourcall]
-            print callindexes
+#            print callindexes
             for x in callindexes:
-                print qso['yourcall'][x]
-                print qso['myqth'][x]
-                print qso['band'][x]
                 if qso['band'][x] in band:
-                    print "Found in band"
                     if qso['myqth'][x] in myqth:
-                        print "And in myqth"
                         if qso['yourqth'][x] in yourqth:
-                            print "And same yourqth"
-                            print "Found dupe!?!?"
+                            print "Duplicate entry: %s  %s  %s    %s  %s  %s" % (mycall,
+                                   qso['mynum'][x], qso['myqth'][x], qso['yourcall'][x],
+                                   qso['yournum'][x], qso['yourqth'][x])
+#                            dupeit = raw_input('Dupe it? ')
+#                            if dupeit not in "y" or dupeit not in "yes" or dupeit not in "Y":
+#                                print "Not logging duplicate"
+#                                break
+#                                continue
 
 
 
