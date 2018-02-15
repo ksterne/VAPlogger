@@ -83,6 +83,12 @@ if myqth is None:
 if band is None:
     band = raw_input('Please enter frequency band in kHz: ')
 
+# Crude way to do a "band" for now. Most ham bands will
+# fit into the +/- 300 kHz range
+bandrange = [ int(band)-300, int(band)+300]
+
+#print bandrange
+
 
 try:
     while (1):
@@ -108,6 +114,8 @@ try:
             continue
         elif entry.lower() in "f2":
             band = raw_input('Please enter new band in kHz: ').strip('\n')
+            # Update the band range
+            bandrange = [ int(band)-300, int(band)+300]
             continue
 
 
@@ -136,7 +144,7 @@ try:
         elif yourqth in states['abbrev'] or yourqth.upper() in states['abbrev']:
             # Make sure the QTH value is uppercase
             yourqth = yourqth.upper()
-        elif yourqth in province['abbrev'] or yourqth.upper() in provnice['abbrev']:
+        elif yourqth in province['abbrev'] or yourqth.upper() in province['abbrev']:
             # Make sure the QTH value is uppercase
             yourqth = yourqth.upper()
         elif yourqth in "DX":
@@ -149,12 +157,12 @@ try:
 
         # Here we'll need to do dupe checking before going on
         if yourcall in qso['yourcall']:
-            print "Found duplicate call at least"
+#            print "Found duplicate call at least"
             # Find all of the places where the callsign matches
             callindexes = [ i for i,x in enumerate(qso['yourcall']) if x == yourcall]
 #            print callindexes
             for x in callindexes:
-                if qso['band'][x] in band:
+                if bandrange[0] < int(qso['band'][x]) < bandrange[1]:
                     if qso['myqth'][x] in myqth:
                         if qso['yourqth'][x] in yourqth:
                             print "Duplicate entry: %s  %s  %s    %s  %s  %s" % (mycall,
