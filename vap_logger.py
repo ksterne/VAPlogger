@@ -30,6 +30,8 @@ qso['yourcall'] = []
 qso['yournum'] = []
 qso['yourqth'] = []
 
+mults = []
+
 parser = argparse.ArgumentParser(description='VA QSO party options')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
 parser.add_argument('-l', '--log', default='default.txt', help="Log filename to read/save to")
@@ -62,8 +64,17 @@ if os.path.isfile(opts.log):
             qso['myqth'].append(line[46:49])
             qso['yourcall'].append(line[53:63].strip(' '))
             qso['yournum'].append(line[64:67])
-            qso['yourqth'].append(line[68:71])
+            qso['yourqth'].append(line[68:71].strip('\n'))
             count=int(line[42:45].strip(' ').lstrip('0'))
+
+            # Load in current multipliers
+# Need to add in way to count self QSO multipliers
+            linemult = line[68:71].strip('\n')
+            if linemult not in mults:
+#                print "New mult found!"
+#                print linemult
+#                print mults
+                mults.append(linemult)
 
             line = readf.readline()
         # increment count value by one to show next QSO
@@ -156,7 +167,6 @@ try:
             continue
 
 
-
         # Here we'll need to do dupe checking before going on
         if yourcall in qso['yourcall']:
 #            print "Found duplicate call at least"
@@ -181,6 +191,7 @@ try:
         if duped:
             duped = False
             continue
+
 
 
         # Lets start to form the output message
@@ -208,6 +219,12 @@ try:
 #            print qso['yourcall']
 #            print qso['yournum']
 #            print qso['yourqth']
+
+            # Check for new multiplier
+            if yourqth not in mults:
+                print "New multiplier!!!"
+                mults.append(yourqth)
+
 
             print "Logged!"
             count += 1
