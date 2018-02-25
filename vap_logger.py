@@ -68,7 +68,6 @@ if os.path.isfile(opts.log):
             count=int(line[42:45].strip(' ').lstrip('0'))
 
             # Load in current multipliers
-# Need to add in way to count self QSO multipliers
             linemult = line[68:71].strip('\n')
             if linemult not in mults:
 #                print "New mult found!"
@@ -127,6 +126,7 @@ try:
 
         if entry.lower() in "f1":
             myqth = raw_input('Enter new QTH: ').strip('\n')
+            myqth = myqth.upper()
             while myqth not in counties["abbrev"]:
                 print myqth + " not found in counties list"
                 myqth = raw_input('Please enter new QTH: ').strip('\n')
@@ -229,7 +229,7 @@ try:
 
             if (qso['myqth'].count(myqth) > 9
                 and myqth not in mults):
-                print "New multiplier from 10 or more QSOs here!"
+                print "New multiplier from 10 or more QSOs here!!!"
                 mults.append(myqth)
 
             # Check for new multiplier
