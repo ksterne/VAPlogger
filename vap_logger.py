@@ -76,6 +76,13 @@ if os.path.isfile(opts.log):
 #                print mults
                 mults.append(linemult)
 
+#            print qso['myqth'].count(line[46:49])
+            if (qso['myqth'].count(line[46:49]) > 9
+                and line[46:49] not in mults):
+                print "New mult from 10 or more QSOs!"
+                mults.append(line[46:49])
+
+
             line = readf.readline()
         # increment count value by one to show next QSO
         count += 1
@@ -219,6 +226,11 @@ try:
 #            print qso['yourcall']
 #            print qso['yournum']
 #            print qso['yourqth']
+
+            if (qso['myqth'].count(myqth) > 9
+                and myqth not in mults):
+                print "New multiplier from 10 or more QSOs here!"
+                mults.append(myqth)
 
             # Check for new multiplier
             if yourqth not in mults:
