@@ -95,10 +95,12 @@ try:
 
         print "Current Frequency band: "+str(band)
         print "f1: change QTH, f2: change band"
+        print ""
         entry = raw_input('Please enter QSO number '+str(count).zfill(3)+': ')
 
 #        print entry
         entry.strip('\n')
+        duped = False
 
         # Give an input to stop the program
         if entry in "exit" or entry in "quit":
@@ -165,15 +167,20 @@ try:
                 if bandrange[0] < int(qso['band'][x]) < bandrange[1]:
                     if qso['myqth'][x] in myqth:
                         if qso['yourqth'][x] in yourqth:
+                            print ""
+                            print "********"
                             print "Duplicate entry: %s  %s  %s    %s  %s  %s" % (mycall,
                                    qso['mynum'][x], qso['myqth'][x], qso['yourcall'][x],
                                    qso['yournum'][x], qso['yourqth'][x])
-#                            dupeit = raw_input('Dupe it? ')
-#                            if dupeit not in "y" or dupeit not in "yes" or dupeit not in "Y":
-#                                print "Not logging duplicate"
-#                                break
-#                                continue
+                            print "*******"
+                            print ""
+                            # Mark duplicate flag as true!
+                            duped = True
 
+        # If duplicate found, don't give the option to log it
+        if duped:
+            duped = False
+            continue
 
 
         # Lets start to form the output message
