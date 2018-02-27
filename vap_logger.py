@@ -24,6 +24,7 @@ count=1
 # Setup QSO list/dictionary?
 qso = {}
 qso['band'] = []
+qso['time'] = []
 qso['myqth'] = []
 qso['mynum'] = []
 qso['yourcall'] = []
@@ -60,6 +61,7 @@ if os.path.isfile(opts.log):
         line = readf.readline()
         while line:
             qso['band'].append(line[5:11].strip(' '))
+            qso['time'].append(line[15:30])
             qso['mynum'].append(line[42:45])
             qso['myqth'].append(line[46:49])
             qso['yourcall'].append(line[53:63].strip(' '))
@@ -78,7 +80,7 @@ if os.path.isfile(opts.log):
 #            print qso['myqth'].count(line[46:49])
             if (qso['myqth'].count(line[46:49]) > 9
                 and line[46:49] not in mults):
-                print "New mult from 10 or more QSOs!"
+#                print "New mult from 10 or more QSOs!"
                 mults.append(line[46:49])
 
 
@@ -109,6 +111,36 @@ bandrange = [ int(band)-300, int(band)+300]
 
 try:
     while (1):
+
+        print ""
+        print "Last few QSOs:"
+        # For now just leave this as the last five
+        if count > 5:
+            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-6],
+                qso['mynum'][count-6], qso['myqth'][count-6],
+                qso['yourcall'][count-6], qso['yournum'][count-6],
+                qso['yourqth'][count-6])
+        if count > 4:
+            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-5],
+                qso['mynum'][count-5], qso['myqth'][count-5],
+                qso['yourcall'][count-5], qso['yournum'][count-5],
+                qso['yourqth'][count-5])
+        if count > 3:
+            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-4],
+                qso['mynum'][count-4], qso['myqth'][count-4],
+                qso['yourcall'][count-4], qso['yournum'][count-4],
+                qso['yourqth'][count-4])
+        if count > 2:
+            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-3],
+                qso['mynum'][count-3], qso['myqth'][count-3],
+                qso['yourcall'][count-3], qso['yournum'][count-3],
+                qso['yourqth'][count-3])
+        if count > 1:
+            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-2],
+                qso['mynum'][count-2], qso['myqth'][count-2],
+                qso['yourcall'][count-2], qso['yournum'][count-2],
+                qso['yourqth'][count-2])
+
 
         print "Current Frequency band: "+str(band)
         print "f1: change QTH, f2: change band"
@@ -200,6 +232,7 @@ try:
             continue
 
 
+        qso['time'].append(dt.datetime.utcnow().strftime('%Y-%m-%d %H%M'))
 
         # Lets start to form the output message
         qsostring = "QSO: " + "{:>6}".format(band) + " PH "
