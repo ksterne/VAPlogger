@@ -33,6 +33,9 @@ qso['yourqth'] = []
 
 mults = []
 
+score = 0
+qsopoints = 0
+
 parser = argparse.ArgumentParser(description='VA QSO party options')
 parser.add_argument('-c', '--config', type=argparse.FileType('r'), help="Config file to load in defaults")
 parser.add_argument('-l', '--log', default='default.txt', help="Log filename to read/save to")
@@ -83,12 +86,22 @@ if os.path.isfile(opts.log):
 #                print "New mult from 10 or more QSOs!"
                 mults.append(line[46:49])
 
+            # Lets start figuring an initial score value
+            # Total up number of qso points, VA mobiles are 3!
+            if '/M' in line[53:63].strip(' ') and line[68:71] in counties['abbrev'] :
+                qsopoints += 3
+            else:
+                qsopoints += 1
+
 
             line = readf.readline()
         # increment count value by one to show next QSO
         count += 1
 
-
+#print len(mults)
+#print mults
+#print len(set(qso['myqth']))
+#print qsopoints
 # Need to add initial setup
 timenow = dt.datetime.utcnow()
 print "The current time is: " + str(timenow)
@@ -141,8 +154,10 @@ try:
                 qso['yourcall'][count-2], qso['yournum'][count-2],
                 qso['yourqth'][count-2])
 
-
-        print "Current Frequency band: "+str(band)
+        # Score is qso pitns multiplied by number of mults plus Bonus points.
+        # Bonus points for mobile, 100 points per each myqth
+        score = (qsopoints*len(mults))+(len(set(qso['myqth']))*100)
+        print "Current Frequency band: "+str(band)+ "  Current score:"+str(score)
         print "f1: change QTH, f2: change band"
         print ""
         entry = raw_input('Please enter QSO number '+str(count).zfill(3)+': ')
@@ -270,6 +285,11 @@ try:
                 print "New multiplier!!!"
                 mults.append(yourqth)
 
+            # Update the QSO points for real-time scoring
+            if '/M' in yourcall and yourqth in counties['abbrev']:
+                qsopoints += 3
+            else:
+                qsopoints += 1
 
             print "Logged!"
             count += 1
