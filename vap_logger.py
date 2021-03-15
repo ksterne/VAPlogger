@@ -58,7 +58,7 @@ if opts.config is not None:
 
 # Check to see if logfile name exists
 if os.path.isfile(opts.log):
-    print "Reading in current log at: %s" % opts.log
+    print("Reading in current log at: %s" % opts.log)
     # Then lets read in current data
     with open(opts.log, 'r') as readf:
         line = readf.readline()
@@ -104,7 +104,7 @@ if os.path.isfile(opts.log):
 #print qsopoints
 # Need to add initial setup
 timenow = dt.datetime.utcnow()
-print "The current time is: " + str(timenow)
+print("The current time is: " + str(timenow))
 
 # Ask for call sign if not set with config file
 if mycall is None:
@@ -125,41 +125,41 @@ bandrange = [ int(band)-300, int(band)+300]
 try:
     while (1):
 
-        print ""
-        print "Last few QSOs:"
+        print("")
+        print("Last few QSOs:")
         # For now just leave this as the last five
         if count > 5:
-            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-6],
+            print('%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-6],
                 qso['mynum'][count-6], qso['myqth'][count-6],
                 qso['yourcall'][count-6], qso['yournum'][count-6],
-                qso['yourqth'][count-6])
+                qso['yourqth'][count-6]))
         if count > 4:
-            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-5],
+            print('%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-5],
                 qso['mynum'][count-5], qso['myqth'][count-5],
                 qso['yourcall'][count-5], qso['yournum'][count-5],
-                qso['yourqth'][count-5])
+                qso['yourqth'][count-5]))
         if count > 3:
-            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-4],
+            print('%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-4],
                 qso['mynum'][count-4], qso['myqth'][count-4],
                 qso['yourcall'][count-4], qso['yournum'][count-4],
-                qso['yourqth'][count-4])
+                qso['yourqth'][count-4]))
         if count > 2:
-            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-3],
+            print('%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-3],
                 qso['mynum'][count-3], qso['myqth'][count-3],
                 qso['yourcall'][count-3], qso['yournum'][count-3],
-                qso['yourqth'][count-3])
+                qso['yourqth'][count-3]))
         if count > 1:
-            print '%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-2],
+            print('%s  %s %-9s %-9s  %s  %s ' % (qso['time'][count-2],
                 qso['mynum'][count-2], qso['myqth'][count-2],
                 qso['yourcall'][count-2], qso['yournum'][count-2],
-                qso['yourqth'][count-2])
+                qso['yourqth'][count-2]))
 
         # Score is qso pitns multiplied by number of mults plus Bonus points.
         # Bonus points for mobile, 100 points per each myqth
         score = (qsopoints*len(mults))+(len(set(qso['myqth']))*100)
-        print "Current Frequency band: "+str(band)+ "  Current score:"+str(score)
-        print "f1: change QTH, f2: change band"
-        print ""
+        print("Current Frequency band: "+str(band)+ "  Current score:"+str(score))
+        print("f1: change QTH, f2: change band")
+        print("")
         entry = raw_input('Please enter QSO number '+str(count).zfill(3)+': ')
 
 #        print entry
@@ -168,14 +168,14 @@ try:
 
         # Give an input to stop the program
         if entry in "exit" or entry in "quit":
-            print "Now exiting..."
+            print("Now exiting...")
             sys.exit()
 
         if entry.lower() in "f1":
             myqth = raw_input('Enter new QTH: ').strip('\n')
             myqth = myqth.upper()
             while myqth not in counties["abbrev"]:
-                print myqth + " not found in counties list"
+                print(myqth + " not found in counties list")
                 myqth = raw_input('Please enter new QTH: ').strip('\n')
 
             continue
@@ -191,7 +191,7 @@ try:
 #        print newqso
 #        print len(newqso)
         if len(newqso) != 3:
-            print "Invalid format, please enter QSO as: callsign,serial#,QTH"
+            print("Invalid format, please enter QSO as: callsign,serial#,QTH")
             continue
 
         yourcall = newqso[0].upper().strip(' ')
@@ -217,7 +217,7 @@ try:
         elif yourqth in "DX":
             some="three"
         else:
-            print 'QTH {} not valid, please try again'.format(yourqth)
+            print('QTH {} not valid, please try again'.format(yourqth))
             continue
 
 
@@ -231,13 +231,13 @@ try:
                 if bandrange[0] < int(qso['band'][x]) < bandrange[1]:
                     if qso['myqth'][x] in myqth:
                         if qso['yourqth'][x] in yourqth:
-                            print ""
-                            print "********"
-                            print "Duplicate entry: %s  %s  %s    %s  %s  %s" % (mycall,
+                            print("")
+                            print("********")
+                            print("Duplicate entry: %s  %s  %s    %s  %s  %s" % (mycall,
                                    qso['mynum'][x], qso['myqth'][x], qso['yourcall'][x],
-                                   qso['yournum'][x], qso['yourqth'][x])
-                            print "*******"
-                            print ""
+                                   qso['yournum'][x], qso['yourqth'][x]))
+                            print("*******")
+                            print("")
                             # Mark duplicate flag as true!
                             duped = True
 
@@ -257,7 +257,7 @@ try:
         qsostring += " " + str(count).zfill(3) + " " + "{:7}".format(myqth)
         qsostring += "{:10}".format(yourcall) + " " + yournum.zfill(3)
         qsostring += " " + yourqth + "\r\n"
-        print qsostring
+        print(qsostring)
 
         logit = raw_input('Log it? ').strip('\n')
         if logit in "y" or logit in "yes" or logit.upper() in "Y":
@@ -277,12 +277,12 @@ try:
 
             if (qso['myqth'].count(myqth) > 9
                 and myqth not in mults):
-                print "New multiplier from 10 or more QSOs here!!!"
+                print("New multiplier from 10 or more QSOs here!!!")
                 mults.append(myqth)
 
             # Check for new multiplier
             if yourqth not in mults:
-                print "New multiplier!!!"
+                print("New multiplier!!!")
                 mults.append(yourqth)
 
             # Update the QSO points for real-time scoring
@@ -291,12 +291,12 @@ try:
             else:
                 qsopoints += 1
 
-            print "Logged!"
+            print("Logged!")
             count += 1
         else:
-            print "Not logged"
+            print("Not logged")
 
 
 
 except KeyboardInterrupt:
-    print '\nInterrupted and exiting...'
+    print('\nInterrupted and exiting...')
