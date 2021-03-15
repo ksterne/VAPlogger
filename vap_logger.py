@@ -108,12 +108,12 @@ print("The current time is: " + str(timenow))
 
 # Ask for call sign if not set with config file
 if mycall is None:
-    mycall = raw_input('Please enter your callsign: ')
+    mycall = input('Please enter your callsign: ')
 # Ask for location if not set with config file
 if myqth is None:
-    myqth = raw_input('Please enter your location: ')
+    myqth = input('Please enter your location: ')
 if band is None:
-    band = raw_input('Please enter frequency band in kHz: ')
+    band = input('Please enter frequency band in kHz: ')
 
 # Crude way to do a "band" for now. Most ham bands will
 # fit into the +/- 300 kHz range
@@ -160,7 +160,7 @@ try:
         print("Current Frequency band: "+str(band)+ "  Current score:"+str(score))
         print("f1: change QTH, f2: change band")
         print("")
-        entry = raw_input('Please enter QSO number '+str(count).zfill(3)+': ')
+        entry = input('Please enter QSO number '+str(count).zfill(3)+': ')
 
 #        print entry
         entry.strip('\n')
@@ -172,15 +172,15 @@ try:
             sys.exit()
 
         if entry.lower() in "f1":
-            myqth = raw_input('Enter new QTH: ').strip('\n')
+            myqth = input('Enter new QTH: ').strip('\n')
             myqth = myqth.upper()
             while myqth not in counties["abbrev"]:
                 print(myqth + " not found in counties list")
-                myqth = raw_input('Please enter new QTH: ').strip('\n')
+                myqth = input('Please enter new QTH: ').strip('\n')
 
             continue
         elif entry.lower() in "f2":
-            band = raw_input('Please enter new band in kHz: ').strip('\n')
+            band = input('Please enter new band in kHz: ').strip('\n')
             # Update the band range
             bandrange = [ int(band)-300, int(band)+300]
             continue
@@ -259,7 +259,7 @@ try:
         qsostring += " " + yourqth + "\r\n"
         print(qsostring)
 
-        logit = raw_input('Log it? ').strip('\n')
+        logit = input('Log it? ').strip('\n')
         if logit in "y" or logit in "yes" or logit.upper() in "Y":
             with open(opts.log, 'a') as logfile:
                logfile.write(qsostring)
